@@ -27,26 +27,26 @@ cd /tmp/aliucord
 mkdir downloads
 wget "https://nightly.link/TymanWasTaken/AliuHermes/actions/artifacts/241134965.zip" -O /tmp/aliucord/downloads/android.zip
 unzip android.zip
-cd /tmp/aliucord
 
 ## Iterate over all discord architectures to download apks and replace native libs
 mkdir /tmp/aliucord/apks/unsigned -p
 architectures_url=(x86 x86_64 arm64_v8a armeabi_v7a)
 architectures_zip=(x86 x86_64 arm64-v8a armeabi-v7a)
+
+cd /tmp/aliucord/downloads/
+
+unzip -o /tmp/aliucord/downloads/hermes-cppruntime-release.aar
+unzip -o /tmp/aliucord/downloads/hermes-release.aar
+
 for i in {1..$#architectures_url}; do
 	# Download config apk
 	wget "https://aliucord.com/download/discord?v=$discordver&split=config.${architectures_url[i]}" -O "/tmp/aliucord/apks/unsigned/config.${architectures_url[i]}.apk"
-
-	# Extract libs from hermes
-	mkdir "/tmp/aliucord/lib/${architectures_zip[i]}" -p
-	unzip -p /tmp/aliucord/downloads/hermes-cppruntime-release.aar "jni/${architectures_zip[i]}/libc++_shared.so" > "/tmp/aliucord/lib/${architectures_zip[i]}/libc++_shared.so"
-	unzip -p /tmp/aliucord/downloads/hermes-release.aar "jni/${architectures_zip[i]}/libhermes.so" > "/tmp/aliucord/lib/${architectures_zip[i]}/libhermes.so"
 	
-	ls -lah "/tmp/aliucord/lib/${architectures_zip[i]}/"
+	ls -lah "jni/${architectures_zip[i]}/"
 
 	# Replace libs in config split
-	zip -0u "/tmp/aliucord/apks/unsigned/config.${architectures_url[i]}.apk" "lib/${architectures_zip[i]}/libhermes.so"
-	zip -0u "/tmp/aliucord/apks/unsigned/config.${architectures_url[i]}.apk" "lib/${architectures_zip[i]}/libc++_shared.so"
+	zip -0u "/tmp/aliucord/apks/unsigned/config.${architectures_url[i]}.apk" "jni/${architectures_zip[i]}/libhermes.so"
+	zip -0u "/tmp/aliucord/apks/unsigned/config.${architectures_url[i]}.apk" "jni/${architectures_zip[i]}/libc++_shared.so"
 done
 
 ## Download AliucordNative

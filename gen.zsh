@@ -41,6 +41,8 @@ for i in {1..$#architectures_url}; do
 	mkdir "/tmp/aliucord/lib/${architectures_zip[i]}" -p
 	unzip -p /tmp/aliucord/downloads/hermes-cppruntime-release.aar "jni/${architectures_zip[i]}/libc++_shared.so" > "/tmp/aliucord/lib/${architectures_zip[i]}/libc++_shared.so"
 	unzip -p /tmp/aliucord/downloads/hermes-release.aar "jni/${architectures_zip[i]}/libhermes.so" > "/tmp/aliucord/lib/${architectures_zip[i]}/libhermes.so"
+	
+	ls -lah "/tmp/aliucord/lib/${architectures_zip[i]}/"
 
 	# Replace libs in config split
 	zip -0u "/tmp/aliucord/apks/unsigned/config.${architectures_url[i]}.apk" "lib/${architectures_zip[i]}/libhermes.so"

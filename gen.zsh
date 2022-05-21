@@ -41,6 +41,10 @@ for i in {1..$#architectures_url}; do
 	# Download config apk
 	wget "https://aliucord.com/download/discord?v=$discordver&split=config.${architectures_url[i]}" -O "/tmp/aliucord/apks/unsigned/config.${architectures_url[i]}.apk"
 
+	# configs need libs/ folder
+	cp "jni/${architectures_zip[i]}/libhermes.so" "lib/${architectures_zip[i]}/libhermes.so"
+	cp "jni/${architectures_zip[i]}/libc++_shared.so" "lib/${architectures_zip[i]}/libc++_shared.so"
+
 	# Replace libs in config split
 	zip -0u "/tmp/aliucord/apks/unsigned/config.${architectures_url[i]}.apk" "jni/${architectures_zip[i]}/libhermes.so"
 	zip -0u "/tmp/aliucord/apks/unsigned/config.${architectures_url[i]}.apk" "jni/${architectures_zip[i]}/libc++_shared.so"

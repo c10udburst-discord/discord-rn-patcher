@@ -18,8 +18,8 @@ jobs:
           java-version: 17
           distribution: 'zulu'
       - name: Grant execute permission
-        run: chmod +x gen.zsh
-      - run: ./gen.zsh ${{ github.event.inputs.version }}
+        run: chmod +x gen.sh
+      - run: ./gen.sh ${{ github.event.inputs.version }}
       - name: Upload
         uses: actions/upload-artifact@v2
         with:

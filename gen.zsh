@@ -36,7 +36,7 @@ architectures_zip=(x86 x86_64 arm64-v8a armeabi-v7a)
 
 unzip -o /tmp/aliucord/downloads/hermes-cppruntime-release.aar
 unzip -o /tmp/aliucord/downloads/hermes-release.aar
-
+mkdir lib
 for i in {1..$#architectures_url}; do
 	# Download config apk
 	wget "https://aliucord.com/download/discord?v=$discordver&split=config.${architectures_url[i]}" -O "/tmp/aliucord/apks/unsigned/config.${architectures_url[i]}.apk"

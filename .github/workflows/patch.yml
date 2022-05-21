@@ -26,6 +26,6 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: discord apk
-          path: /tmp/aliucord/apks/
+          path: /tmp/aliucord/apks/*.apk
         
       

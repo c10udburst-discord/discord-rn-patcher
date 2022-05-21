@@ -1,5 +1,7 @@
---- 129203.orig.xml	2022-05-19 19:39:06.162455572 -0600
-+++ 129203.xml	2022-05-19 19:38:35.114343855 -0600
+diff --git a/AndroidManifest.xml b/AndroidManifest.modified.xml
+index 1aec6da..713b74d 100755
+--- a/AndroidManifest.xml
++++ b/AndroidManifest.modified.xml
 @@ -1,4 +1,4 @@
 -<?xml version="1.0" encoding="utf-8" standalone="no"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:compileSdkVersion="31" android:compileSdkVersionCodename="12" package="com.discord" platformBuildVersionCode="31" platformBuildVersionName="12">
 +<?xml version="1.0" encoding="utf-8" standalone="no"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:compileSdkVersion="23" android:compileSdkVersionCodename="6.0-2438415" package="com.discord" platformBuildVersionCode="31" platformBuildVersionName="12">
@@ -19,10 +21,17 @@
      <uses-permission android:name="com.android.vending.BILLING"/>
      <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
      <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE"/>
--    <application android:allowBackup="false" android:appCategory="social" android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:dataExtractionRules="@xml/data_extraction_rules" android:extractNativeLibs="false" android:fullBackupContent="@xml/data_extraction_rules_legacy" android:icon="@mipmap/ic_logo_square_canary" android:isSplitRequired="true" android:label="@string/app_name" android:largeHeap="true" android:name="com.discord.MainApplication" android:networkSecurityConfig="@xml/network_security_config" android:roundIcon="@mipmap/ic_logo_round_canary" android:supportsRtl="false" android:theme="@style/AppTheme">
+-    <application android:allowBackup="false" android:appCategory="social" android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:dataExtractionRules="@xml/data_extraction_rules" android:extractNativeLibs="false" android:fullBackupContent="@xml/data_extraction_rules_legacy" android:icon="@mipmap/ic_logo_square_canary" android:isSplitRequired="true" android:label="@string/app_name" android:largeHeap="true" android:localeConfig="@xml/locales_config" android:name="com.discord.MainApplication" android:networkSecurityConfig="@xml/network_security_config" android:roundIcon="@mipmap/ic_logo_round_canary" android:supportsRtl="false" android:theme="@style/AppTheme">
 +    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
 +    <application android:allowBackup="false" android:appCategory="social" android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:dataExtractionRules="@xml/data_extraction_rules" android:extractNativeLibs="false" android:icon="@mipmap/ic_logo_square_canary" android:isSplitRequired="true" android:label="@string/app_name" android:largeHeap="true" android:name="com.discord.MainApplication" android:networkSecurityConfig="@xml/network_security_config" android:roundIcon="@mipmap/ic_logo_round_canary" android:supportsRtl="false" android:theme="@style/AppTheme" android:usesCleartextTraffic="true">
-+         <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
          <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode" android:exported="true" android:label="@string/app_name" android:launchMode="singleTask" android:name="com.discord.MainActivity" android:windowSoftInputMode="adjustResize">
              <intent-filter>
                  <action android:name="android.intent.action.MAIN"/>
+@@ -195,5 +196,6 @@
+         <meta-data android:name="com.android.stamp.type" android:value="STAMP_TYPE_DISTRIBUTION_APK"/>
+         <meta-data android:name="com.android.vending.splits" android:resource="@xml/splits0"/>
+         <meta-data android:name="com.android.vending.derived.apk.id" android:value="3"/>
++        <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+     </application>
+ </manifest>
+\ No newline at end of file

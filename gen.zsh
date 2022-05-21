@@ -25,6 +25,7 @@ chmod +x /tmp/aliucord/tools/hbcdump
 ## Download hermes native libraries
 cd /tmp/aliucord
 mkdir downloads
+cd /tmp/aliucord/downloads
 wget "https://nightly.link/TymanWasTaken/AliuHermes/actions/artifacts/241134965.zip" -O /tmp/aliucord/downloads/android.zip
 unzip android.zip
 
@@ -32,8 +33,6 @@ unzip android.zip
 mkdir /tmp/aliucord/apks/unsigned -p
 architectures_url=(x86 x86_64 arm64_v8a armeabi_v7a)
 architectures_zip=(x86 x86_64 arm64-v8a armeabi-v7a)
-
-cd /tmp/aliucord/downloads/
 
 unzip -o /tmp/aliucord/downloads/hermes-cppruntime-release.aar
 unzip -o /tmp/aliucord/downloads/hermes-release.aar

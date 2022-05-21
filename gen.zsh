@@ -2,7 +2,8 @@
 
 ## Get version number to download and patch
 if [ -z "$1" ]; then
-	read "discordver?Version number to patch: "
+	echo "No version specified"
+	exit 1
 else
 	discordver="$1"
 fi
@@ -11,10 +12,19 @@ fi
 rm -rf /tmp/aliucord
 mkdir /tmp/aliucord
 
+mkdir /tmp/aliucord/downloads
+cp manifest.patch /tmp/aliucord/downloads/manifest.patch
+
+## Download tools
+mkdir /tmp/aliucord/tools
+wget "https://github.com/patrickfav/uber-apk-signer/releases/download/v1.2.1/uber-apk-signer-1.2.1.jar" -O /tmp/aliucord/tools/uber-apk-signer.jar
+wget "https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.6.1.jar" -O /tmp/aliucord/tools/apktool.jar
+cp hbcdump /tmp/aliucord/tools/hbcdump
+chmod +x /tmp/aliucord/tools/hbcdump
+
 ## Download hermes native libraries
 cd /tmp/aliucord
 mkdir downloads
-cd /tmp/aliucord/downloads
 wget "https://nightly.link/TymanWasTaken/AliuHermes/actions/artifacts/241134965.zip" -O /tmp/aliucord/downloads/android.zip
 unzip android.zip
 cd /tmp/aliucord
@@ -44,8 +54,7 @@ unzip -p /tmp/aliucord/downloads/AliucordNative.zip classes.dex > /tmp/aliucord/
 ## Download and patch base apk
 wget "https://aliucord.com/download/discord?v=$discordver" -O /tmp/aliucord/downloads/base.apk
 cd downloads
-apktool d --no-src base.apk
-wget "https://cdn.discordapp.com/attachments/925873645593722970/977022955492098088/manifest.patch" -O /tmp/aliucord/downloads/manifest.patch
+java -jar /tmp/aliucord/tools/apktool.jar d --no-src base.apk
 cd base
 patch AndroidManifest.xml ../manifest.patch
 for f in ./classes?.dex(On); do
@@ -56,7 +65,7 @@ done
 mv classes.dex classes2.dex
 cp /tmp/aliucord/downloads/AliucordNative.dex classes.dex
 cd ..
-apktool b base
+java -jar /tmp/aliucord/tools/apktool.jar b base
 cd base/build/apk
 
 ## Replace all necessary files in base.apk
@@ -75,10 +84,10 @@ wget "https://aliucord.com/download/discord?v=$discordver&split=config.hdpi" -O 
 wget "https://aliucord.com/download/discord?v=$discordver&split=config.xxhdpi" -O /tmp/aliucord/apks/unsigned/config.xxhdpi.apk
 
 ## Sign all apks
-uber-apk-signer --apks /tmp/aliucord/apks/unsigned/ --allowResign --out /tmp/aliucord/apks/
+java -jar /tmp/aliucord/tools/uber-apk-signer.jar --apks /tmp/aliucord/apks/unsigned/ --allowResign --out /tmp/aliucord/apks/
 
 ## Disassemble .bundle file
 cd /tmp/aliucord/downloads
 unzip -p base.apk assets/index.android.bundle > index.android.bundle
-hbcdump index.android.bundle -human -pretty-disassemble -out=bytecode.hbc -c="disassemble;quit"
+/tmp/aliucord/tools/hbcdump index.android.bundle -human -pretty-disassemble -out=bytecode.hbc -c="disassemble;quit"
 cp bytecode.hbc ../apks/

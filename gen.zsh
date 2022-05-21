@@ -46,8 +46,8 @@ for i in {1..$#architectures_url}; do
 	cp "jni/${architectures_zip[i]}/libc++_shared.so" "lib/${architectures_zip[i]}/libc++_shared.so"
 
 	# Replace libs in config split
-	zip -0u "/tmp/aliucord/apks/unsigned/config.${architectures_url[i]}.apk" "jni/${architectures_zip[i]}/libhermes.so"
-	zip -0u "/tmp/aliucord/apks/unsigned/config.${architectures_url[i]}.apk" "jni/${architectures_zip[i]}/libc++_shared.so"
+	zip -0u "/tmp/aliucord/apks/unsigned/config.${architectures_url[i]}.apk" "lib/${architectures_zip[i]}/libhermes.so"
+	zip -0u "/tmp/aliucord/apks/unsigned/config.${architectures_url[i]}.apk" "lib/${architectures_zip[i]}/libc++_shared.so"
 done
 
 ## Download AliucordNative

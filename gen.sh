@@ -1,4 +1,4 @@
-#! /bin/zsh
+#! /bin/bash
 
 ## Get version number to download and patch
 if [ -z "$1" ]; then

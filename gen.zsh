@@ -10,9 +10,8 @@ fi
 
 ## Make clean tmp dir
 rm -rf /tmp/aliucord
-mkdir /tmp/aliucord
+mkdir -p /tmp/aliucord/downloads
 
-mkdir /tmp/aliucord/downloads
 cp manifest.patch /tmp/aliucord/downloads/manifest.patch
 
 ## Download tools
@@ -23,8 +22,6 @@ cp hbcdump /tmp/aliucord/tools/hbcdump
 chmod +x /tmp/aliucord/tools/hbcdump
 
 ## Download hermes native libraries
-cd /tmp/aliucord
-mkdir downloads
 cd /tmp/aliucord/downloads
 wget "https://nightly.link/TymanWasTaken/AliuHermes/actions/artifacts/241134965.zip" -O /tmp/aliucord/downloads/android.zip
 unzip android.zip

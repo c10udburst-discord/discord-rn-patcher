@@ -52,7 +52,6 @@ unzip /tmp/aliucord/downloads/AliucordNative.zip
 
 ## Download and patch base apk
 wget "https://aliucord.com/download/discord?v=$discordver" -O /tmp/aliucord/downloads/base.apk
-cd downloads
 java -jar /tmp/aliucord/tools/apktool.jar d --no-src base.apk
 cd base
 patch AndroidManifest.xml ../manifest.patch

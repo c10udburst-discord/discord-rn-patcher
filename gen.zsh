@@ -61,7 +61,7 @@ for f in ./classes?.dex(On); do
 	mv $f "${f/$OLD_NUM/$NEW_NUM}"
 done
 mv classes.dex classes2.dex
-cp /tmp/aliucord/downloads/AliucordNative.dex classes.dex
+cp /tmp/aliucord/downloads/classes.dex classes.dex
 cd ..
 java -jar /tmp/aliucord/tools/apktool.jar b base
 cd base/build/apk

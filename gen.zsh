@@ -40,8 +40,6 @@ unzip -o /tmp/aliucord/downloads/hermes-release.aar
 for i in {1..$#architectures_url}; do
 	# Download config apk
 	wget "https://aliucord.com/download/discord?v=$discordver&split=config.${architectures_url[i]}" -O "/tmp/aliucord/apks/unsigned/config.${architectures_url[i]}.apk"
-	
-	ls -lah "jni/${architectures_zip[i]}/"
 
 	# Replace libs in config split
 	zip -0u "/tmp/aliucord/apks/unsigned/config.${architectures_url[i]}.apk" "jni/${architectures_zip[i]}/libhermes.so"
@@ -50,7 +48,7 @@ done
 
 ## Download AliucordNative
 wget "https://nightly.link/Aliucord/AliucordNative/workflows/android/main/AliucordNative.zip" -O /tmp/aliucord/downloads/AliucordNative.zip
-unzip -p /tmp/aliucord/downloads/AliucordNative.zip classes.dex > /tmp/aliucord/downloads/AliucordNative.dex
+unzip /tmp/aliucord/downloads/AliucordNative.zip
 
 ## Download and patch base apk
 wget "https://aliucord.com/download/discord?v=$discordver" -O /tmp/aliucord/downloads/base.apk

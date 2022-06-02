@@ -23,9 +23,9 @@ jobs:
         run: chmod +x gen.zsh
       - run: ./gen.zsh ${{ github.event.inputs.version }}
       - name: Upload
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
-          name: discord apk
+          name: discord_${{ github.event.inputs.version }}
           path: /tmp/aliucord/apks/*.apk
         
       

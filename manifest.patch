@@ -1,5 +1,5 @@
 diff --git a/AndroidManifest.orig.xml b/AndroidManifest.mod.xml
-index 86a7cab..e968cd4 100755
+index c6b06e9..44d7e7f 100755
 --- a/AndroidManifest.orig.xml
 +++ b/AndroidManifest.mod.xml
 @@ -1,4 +1,4 @@
@@ -27,40 +27,7 @@ index 86a7cab..e968cd4 100755
          <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode" android:exported="true" android:label="@string/app_name" android:launchMode="singleTask" android:name="com.discord.MainActivity" android:windowSoftInputMode="adjustResize">
              <intent-filter>
                  <action android:name="android.intent.action.MAIN"/>
-@@ -144,11 +145,6 @@
-                 <action android:name="android.intent.action.DOWNLOAD_COMPLETE"/>
-             </intent-filter>
-         </receiver>
--        <receiver android:exported="true" android:name="com.adjust.sdk.AdjustReferrerReceiver" android:permission="android.permission.INSTALL_PACKAGES">
--            <intent-filter>
--                <action android:name="com.android.vending.INSTALL_REFERRER"/>
--            </intent-filter>
--        </receiver>
-         <provider android:authorities="com.discord.provider" android:exported="false" android:grantUriPermissions="true" android:name="androidx.core.content.FileProvider">
-             <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/provider_paths"/>
-         </provider>
-@@ -175,14 +171,9 @@
-         <activity android:exported="false" android:name="com.jakewharton.processphoenix.ProcessPhoenix" android:process=":phoenix" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
-         <activity android:excludeFromRecents="true" android:exported="false" android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
-         <service android:exported="true" android:name="com.google.android.gms.auth.api.signin.RevocationBoundService" android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION" android:visibleToInstantApps="true"/>
--        <receiver android:enabled="true" android:exported="false" android:name="com.google.android.gms.analytics.AnalyticsReceiver"/>
--        <service android:enabled="true" android:exported="false" android:name="com.google.android.gms.analytics.AnalyticsService"/>
--        <service android:enabled="true" android:exported="false" android:name="com.google.android.gms.analytics.AnalyticsJobService" android:permission="android.permission.BIND_JOB_SERVICE"/>
-         <activity android:exported="false" android:name="com.google.android.gms.common.api.GoogleApiActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
-         <provider android:authorities="com.discord.firebaseinitprovider" android:directBootAware="true" android:exported="false" android:initOrder="100" android:name="com.google.firebase.provider.FirebaseInitProvider"/>
-         <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
--        <provider android:authorities="com.discord.SentryInitProvider" android:exported="false" android:name="io.sentry.android.core.SentryInitProvider"/>
--        <provider android:authorities="com.discord.SentryPerformanceProvider" android:exported="false" android:initOrder="200" android:name="io.sentry.android.core.SentryPerformanceProvider"/>
-         <provider android:authorities="com.discord.lifecycle-process" android:exported="false" android:multiprocess="true" android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"/>
-         <service android:exported="false" android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery">
-             <meta-data android:name="backend:com.google.android.datatransport.cct.CctBackendFactory" android:value="cct"/>
-@@ -190,11 +181,11 @@
-         <service android:exported="false" android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService" android:permission="android.permission.BIND_JOB_SERVICE"/>
-         <receiver android:exported="false" android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"/>
-         <meta-data android:name="com.google.android.play.billingclient.version" android:value="4.1.0"/>
--        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize" android:exported="false" android:name="com.android.billingclient.api.ProxyBillingActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
-         <meta-data android:name="com.android.vending.splits.required" android:value="true"/>
-         <meta-data android:name="com.android.stamp.source" android:value="https://play.google.com/store"/>
+@@ -204,5 +205,6 @@
          <meta-data android:name="com.android.stamp.type" android:value="STAMP_TYPE_DISTRIBUTION_APK"/>
          <meta-data android:name="com.android.vending.splits" android:resource="@xml/splits0"/>
          <meta-data android:name="com.android.vending.derived.apk.id" android:value="3"/>

@@ -50,7 +50,7 @@ done
 ## Download AliucordNative
 ## TODO: revert
 # wget -nv "https://nightly.link/Aliucord/AliucordNative/workflows/android/main/AliucordNative.zip" -O /tmp/aliucord/downloads/AliucordNative.zip
-wget -nv "https://nightly.link/c10udburst-discord/AliucordNative/actions/runs/2474278657/AliucordNative.zip" -O /tmp/aliucord/downloads/AliucordNative.zip
+wget -nv "https://nightly.link/c10udburst-discord/AliucordNative/actions/runs/2475197721/AliucordNative.zip" -O /tmp/aliucord/downloads/AliucordNative.zip
 unzip /tmp/aliucord/downloads/AliucordNative.zip
 
 ## Download and patch base apk

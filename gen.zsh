@@ -16,14 +16,14 @@ cp manifest.patch /tmp/aliucord/downloads/manifest.patch
 
 ## Download tools
 mkdir /tmp/aliucord/tools
-wget "https://github.com/patrickfav/uber-apk-signer/releases/download/v1.2.1/uber-apk-signer-1.2.1.jar" -O /tmp/aliucord/tools/uber-apk-signer.jar
-wget "https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.6.1.jar" -O /tmp/aliucord/tools/apktool.jar
+wget -nv "https://github.com/patrickfav/uber-apk-signer/releases/download/v1.2.1/uber-apk-signer-1.2.1.jar" -O /tmp/aliucord/tools/uber-apk-signer.jar
+wget -nv "https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.6.1.jar" -O /tmp/aliucord/tools/apktool.jar
 cp hbcdump /tmp/aliucord/tools/hbcdump
 chmod +x /tmp/aliucord/tools/hbcdump
 
 ## Download hermes native libraries
 cd /tmp/aliucord/downloads
-wget "https://nightly.link/TymanWasTaken/AliuHermes/actions/artifacts/241134965.zip" -O /tmp/aliucord/downloads/android.zip
+wget -nv "https://nightly.link/TymanWasTaken/AliuHermes/actions/artifacts/241134965.zip" -O /tmp/aliucord/downloads/android.zip
 unzip android.zip
 
 ## Iterate over all discord architectures to download apks and replace native libs
@@ -35,7 +35,7 @@ unzip -o /tmp/aliucord/downloads/hermes-cppruntime-release.aar
 unzip -o /tmp/aliucord/downloads/hermes-release.aar
 for i in {1..$#architectures_url}; do
 	# Download config apk
-	wget "https://aliucord.com/download/discord?v=$discordver&split=config.${architectures_url[i]}" -O "/tmp/aliucord/apks/unsigned/config.${architectures_url[i]}.apk"
+	wget -nv "https://aliucord.com/download/discord?v=$discordver&split=config.${architectures_url[i]}" -O "/tmp/aliucord/apks/unsigned/config.${architectures_url[i]}.apk"
 
 	# configs need libs/ folder
 	mkdir -p "lib/${architectures_zip[i]}"
@@ -48,11 +48,11 @@ for i in {1..$#architectures_url}; do
 done
 
 ## Download AliucordNative
-wget "https://nightly.link/Aliucord/AliucordNative/workflows/android/main/AliucordNative.zip" -O /tmp/aliucord/downloads/AliucordNative.zip
+wget -nv "https://nightly.link/Aliucord/AliucordNative/workflows/android/main/AliucordNative.zip" -O /tmp/aliucord/downloads/AliucordNative.zip
 unzip /tmp/aliucord/downloads/AliucordNative.zip
 
 ## Download and patch base apk
-wget "https://aliucord.com/download/discord?v=$discordver" -O /tmp/aliucord/downloads/base.apk
+wget -nv "https://aliucord.com/download/discord?v=$discordver" -O /tmp/aliucord/downloads/base.apk
 java -jar /tmp/aliucord/tools/apktool.jar d --no-src base.apk
 cd base
 patch AndroidManifest.xml ../manifest.patch
@@ -62,7 +62,8 @@ for f in ./classes?.dex(On); do
 	echo "$f -> ${f/$OLD_NUM/$NEW_NUM}"
 	mv $f "${f/$OLD_NUM/$NEW_NUM}"
 done
-# mv classes.dex classes2.dex
+echo "classes.dex -> classes2.dex"
+mv classes.dex classes2.dex
 cp /tmp/aliucord/downloads/classes.dex classes.dex
 cd ..
 java -jar /tmp/aliucord/tools/apktool.jar b base
@@ -77,11 +78,11 @@ cp /tmp/aliucord/downloads/base.apk /tmp/aliucord/apks/unsigned/base.apk
 
 ## Download rest of the splits
 # Lanuage splits
-wget "https://aliucord.com/download/discord?v=$discordver&split=config.en" -O /tmp/aliucord/apks/unsigned/config.en.apk
-wget "https://aliucord.com/download/discord?v=$discordver&split=config.de" -O /tmp/aliucord/apks/unsigned/config.de.apk
+wget -nv "https://aliucord.com/download/discord?v=$discordver&split=config.en" -O /tmp/aliucord/apks/unsigned/config.en.apk
+wget -nv "https://aliucord.com/download/discord?v=$discordver&split=config.de" -O /tmp/aliucord/apks/unsigned/config.de.apk
 # DPI Splits
-wget "https://aliucord.com/download/discord?v=$discordver&split=config.hdpi" -O /tmp/aliucord/apks/unsigned/config.hdpi.apk
-wget "https://aliucord.com/download/discord?v=$discordver&split=config.xxhdpi" -O /tmp/aliucord/apks/unsigned/config.xxhdpi.apk
+wget -nv "https://aliucord.com/download/discord?v=$discordver&split=config.hdpi" -O /tmp/aliucord/apks/unsigned/config.hdpi.apk
+wget -nv "https://aliucord.com/download/discord?v=$discordver&split=config.xxhdpi" -O /tmp/aliucord/apks/unsigned/config.xxhdpi.apk
 
 ## Sign all apks
 java -jar /tmp/aliucord/tools/uber-apk-signer.jar --apks /tmp/aliucord/apks/unsigned/ --allowResign --out /tmp/aliucord/apks/

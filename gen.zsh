@@ -59,9 +59,10 @@ patch AndroidManifest.xml ../manifest.patch
 for f in ./classes?.dex(On); do
 	OLD_NUM="${f//\.(\/classes|dex)/}"
 	NEW_NUM=$((OLD_NUM+1))
+	echo "$f -> ${f/$OLD_NUM/$NEW_NUM}"
 	mv $f "${f/$OLD_NUM/$NEW_NUM}"
 done
-mv classes.dex classes2.dex
+# mv classes.dex classes2.dex
 cp /tmp/aliucord/downloads/classes.dex classes.dex
 cd ..
 java -jar /tmp/aliucord/tools/apktool.jar b base

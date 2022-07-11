@@ -23,7 +23,7 @@ chmod +x /tmp/aliucord/tools/hbcdump
 
 ## Download hermes native libraries
 cd /tmp/aliucord/downloads
-wget -nv "https://nightly.link/TymanWasTaken/AliuHermes/actions/artifacts/241134965.zip" -O /tmp/aliucord/downloads/android.zip
+wget -nv "https://nightly.link/Aliucord/hermes/workflows/ci/0.11.0-aliucord/android.zip" -O /tmp/aliucord/downloads/android.zip
 unzip android.zip
 
 ## Iterate over all discord architectures to download apks and replace native libs
@@ -79,7 +79,7 @@ cp /tmp/aliucord/downloads/base.apk /tmp/aliucord/apks/unsigned/base.apk
 ## Download rest of the splits
 # Lanuage splits
 wget -nv "https://aliucord.com/download/discord?v=$discordver&split=config.en" -O /tmp/aliucord/apks/unsigned/config.en.apk
-wget -nv "https://aliucord.com/download/discord?v=$discordver&split=config.de" -O /tmp/aliucord/apks/unsigned/config.de.apk
+# wget -nv "https://aliucord.com/download/discord?v=$discordver&split=config.de" -O /tmp/aliucord/apks/unsigned/config.de.apk
 # DPI Splits
 wget -nv "https://aliucord.com/download/discord?v=$discordver&split=config.hdpi" -O /tmp/aliucord/apks/unsigned/config.hdpi.apk
 wget -nv "https://aliucord.com/download/discord?v=$discordver&split=config.xxhdpi" -O /tmp/aliucord/apks/unsigned/config.xxhdpi.apk

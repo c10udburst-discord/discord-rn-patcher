@@ -55,7 +55,11 @@ unzip /tmp/aliucord/downloads/AliucordNative.zip
 wget -nv "https://aliucord.com/download/discord?v=$discordver" -O /tmp/aliucord/downloads/base.apk
 java -jar /tmp/aliucord/tools/apktool.jar d --no-src base.apk
 cd base
-patch AndroidManifest.xml ../manifest.patch
+echo "Patching manifest"
+cat 'AndroidManifest.xml' \
+| sed 's/<uses-permission android:maxSdkVersion="28" android:name="android.permission.WRITE_EXTERNAL_STORAGE"\/>/<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"\/>\n    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"\/>/g' \
+| sed 's/<application /<application android:usesCleartextTraffic="true" /g' \
+| sed 's/<\/application>/<activity android:name="com.facebook.react.devsupport.DevSettingsActivity" android:exported="true" \/>\n<\/application>/g' > AndroidManifest.xml
 for f in ./classes?.dex(On); do
 	OLD_NUM="${f//\.(\/classes|dex)/}"
 	NEW_NUM=$((OLD_NUM+1))

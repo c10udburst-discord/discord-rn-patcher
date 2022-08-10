@@ -26,6 +26,6 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: discord_${{ github.event.inputs.version }}
-          path: /tmp/aliucord/apks/*.apk
+          path: /tmp/aliucord/apks/*-debugSigned.apk
         
       

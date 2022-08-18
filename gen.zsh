@@ -58,7 +58,7 @@ cd base
 echo "Patching manifest"
 cat 'AndroidManifest.xml' \
 | sed 's/<uses-permission android:maxSdkVersion="28" android:name="android.permission.WRITE_EXTERNAL_STORAGE"\/>/<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"\/>\n    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"\/>/g' \
-| sed 's/<application /<application android:usesCleartextTraffic="true" /g' \
+| sed 's/<application /<application android:usesCleartextTraffic="true" android:debuggable="true" /g' \
 | sed 's/<\/application>/<activity android:name="com.facebook.react.devsupport.DevSettingsActivity" android:exported="true" \/>\n<\/application>/g' > AndroidManifest.xml
 for f in ./classes?.dex(On); do
 	OLD_NUM="${f//\.(\/classes|dex)/}"

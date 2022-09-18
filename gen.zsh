@@ -64,7 +64,7 @@ cat 'AndroidManifest.xml' \
 | sed 's/<meta-data android:name="com.google.android.nearby.messages.API_KEY"/<meta-data android:name="firebase_crashlytics_collection_enabled" android:value="false"\/>\n<meta-data android:name="com.google.android.nearby.messages.API_KEY"/g' \
 | sed 's/package="com.discord"/package="com.aliucordrn"/g' \
 | sed 's/android:authorities="com.discord/android:authorities="com.aliucordrn/g' \
-| sed 's/android:label="@string/app_name"/android:label="AliucordRN"/g' > AndroidManifest.xml
+| sed 's/android:label="@string\/app_name"/android:label="AliucordRN"/g' > AndroidManifest.xml
 for f in ./classes?.dex(On); do
 	OLD_NUM="${f//\.(\/classes|dex)/}"
 	NEW_NUM=$((OLD_NUM+1))

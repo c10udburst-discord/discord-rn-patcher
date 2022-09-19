@@ -34,21 +34,8 @@ architectures_zip=(x86 x86_64 arm64-v8a armeabi-v7a)
 unzip -o /tmp/aliucord/downloads/hermes-cppruntime-release.aar
 unzip -o /tmp/aliucord/downloads/hermes-release.aar
 for i in {1..$#architectures_url}; do
-	cd /tmp/aliucord/downloads
 	# Download config apk
-	wget -nv "https://aliucord.com/download/discord?v=$discordver&split=config.${architectures_url[i]}" -O "config.${architectures_url[i]}.apk"
-	java -jar /tmp/aliucord/tools/apktool.jar d --no-src "config.${architectures_url[i]}.apk"
-	cd "config.${architectures_url[i]}"
-	echo "Patching manifest"
-	cat 'AndroidManifest.xml' \
-	| sed 's/package="com.discord"/package="com.aliucordrn"/g' > AndroidManifest.xml
-	cd ..
-	java -jar /tmp/aliucord/tools/apktool.jar b "config.${architectures_url[i]}"
-	cd "config.${architectures_url[i]}/build/apk"
-	zip -u "/tmp/aliucord/downloads/config.${architectures_url[i]}.apk" AndroidManifest.xml
-	cp "/tmp/aliucord/downloads/config.${architectures_url[i]}.ap.apk" "/tmp/aliucord/apks/unsigned/config.${architectures_url[i]}.apk"
-	
-	cd /tmp/aliucord/downloads
+	wget -nv "https://aliucord.com/download/discord?v=$discordver&split=config.${architectures_url[i]}" -O "/tmp/aliucord/apks/unsigned/config.${architectures_url[i]}.apk"
 
 	# configs need libs/ folder
 	mkdir -p "lib/${architectures_zip[i]}"
@@ -98,23 +85,13 @@ for dex in ./classes*.dex; do
 done
 cp /tmp/aliucord/downloads/base.apk /tmp/aliucord/apks/unsigned/base.apk
 
-## Download and patch rest of the splits
-splits=(config.en config.hdpi config.xxhdpi) #config.de
-for split in $splits; do
-	cd /tmp/aliucord/downloads
-	wget -nv "https://aliucord.com/download/discord?v=$discordver&split=$split" -O "$split.apk"
-	java -jar /tmp/aliucord/tools/apktool.jar d --no-src "$split.apk"
-	cd $split
-	echo "Patching manifest"
-	cat 'AndroidManifest.xml' \
-	| sed 's/package="com.discord"/package="com.aliucordrn"/g' > AndroidManifest.xml
-	cd ..
-	java -jar /tmp/aliucord/tools/apktool.jar b $split
-	cd "$split/build/apk"
-	zip -u "/tmp/aliucord/downloads/$split.apk" AndroidManifest.xml
-	cp "/tmp/aliucord/downloads/$split.apk" "/tmp/aliucord/apks/unsigned/$split.apk"
-done
-
+## Download rest of the splits
+# Lanuage splits
+wget -nv "https://aliucord.com/download/discord?v=$discordver&split=config.en" -O /tmp/aliucord/apks/unsigned/config.en.apk
+# wget -nv "https://aliucord.com/download/discord?v=$discordver&split=config.de" -O /tmp/aliucord/apks/unsigned/config.de.apk
+# DPI Splits
+wget -nv "https://aliucord.com/download/discord?v=$discordver&split=config.hdpi" -O /tmp/aliucord/apks/unsigned/config.hdpi.apk
+wget -nv "https://aliucord.com/download/discord?v=$discordver&split=config.xxhdpi" -O /tmp/aliucord/apks/unsigned/config.xxhdpi.apk
 
 ## Sign all apks
 java -jar /tmp/aliucord/tools/uber-apk-signer.jar --apks /tmp/aliucord/apks/unsigned/ --allowResign --out /tmp/aliucord/apks/

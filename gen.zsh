@@ -12,6 +12,8 @@ fi
 rm -rf /tmp/aliucord
 mkdir -p /tmp/aliucord/downloads
 
+cp manifest.patch /tmp/aliucord/downloads/manifest.patch
+
 ## Download tools
 mkdir /tmp/aliucord/tools
 wget -nv "https://github.com/patrickfav/uber-apk-signer/releases/download/v1.2.1/uber-apk-signer-1.2.1.jar" -O /tmp/aliucord/tools/uber-apk-signer.jar

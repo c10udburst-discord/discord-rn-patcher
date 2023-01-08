@@ -1,8 +1,7 @@
-> **Warning**
-
-> You will use [AliucordManager](https://github.com/Aliucord/AliucordManager) instead, as it is now usable
-
 # Discord RN Patcher
+
+> **Warning**
+> You will use [AliucordManager](https://github.com/Aliucord/AliucordManager) instead, as it is now usable
 
 Inject [AliucordRN](https://github.com/Aliucord/AliucordRN) into discord's react native alpha using github workflows.
 
